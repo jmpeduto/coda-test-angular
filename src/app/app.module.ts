@@ -11,10 +11,12 @@ import { MiaCoreModule, MIA_GOOGLE_STORAGE_PROVIDER } from '@agencycoda/mia-core
 import { MiaTableModule } from '@agencycoda/mia-table';
 import { MiaFormModule } from '@agencycoda/mia-form';
 import { MiaLoadingModule } from '@agencycoda/mia-loading';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
