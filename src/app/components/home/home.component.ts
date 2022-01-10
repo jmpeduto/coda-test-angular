@@ -89,7 +89,7 @@ export class HomeComponent implements OnInit {
     this.tableConfig.loadingColor = 'red';
     this.tableConfig.hasEmptyScreen = true;
     this.tableConfig.emptyScreenTitle =
-      'No tenes cargado ningun elemento todavia';
+      'No hay clientes almacenados en el sistema';
 
     this.tableConfig.onClick.subscribe((result) => {
       console.log('--ACTION--');
@@ -102,8 +102,8 @@ export class HomeComponent implements OnInit {
   clientEdit(client:Client) {
     let data = new MiaFormModalConfig();
     data.service = this._clientService;
-    data.titleNew = 'Create Contact';
-    data.titleEdit = 'Edit Contact';
+    data.titleNew = 'Create Client';
+    data.titleEdit = 'Edit Client';
     let config = new MiaFormConfig();
     // config.fields = [{ key: 'email', type: 'email'}];
     data.item = client;

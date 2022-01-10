@@ -7,5 +7,14 @@
         "pathRewrite": {
           "^/client/list": ""
         }
+    },
+    "/client/save*": {
+      "target": "https://agency-coda.uc.r.appspot.com/client/save",
+      "secure": false,
+      "logLevel": "debug",
+      "changeOrigin": true,
+        "pathRewrite": {
+          "^/client/save": ""
+        }
     }
 }
