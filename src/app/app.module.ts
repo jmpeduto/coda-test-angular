@@ -12,11 +12,13 @@ import { MiaTableModule } from '@agencycoda/mia-table';
 import { MiaFormModule } from '@agencycoda/mia-form';
 import { MiaLoadingModule } from '@agencycoda/mia-loading';
 import { HomeComponent } from './components/home/home.component';
+import { ClientActionsDialogComponent } from './components/client-actions-dialog/client-actions-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    ClientActionsDialogComponent
   ],
   imports: [
     BrowserModule,

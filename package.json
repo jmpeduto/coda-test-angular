@@ -14,7 +14,7 @@
     "@agencycoda/mia-core": "^11.0.36",
     "@agencycoda/mia-form": "^11.0.56",
     "@agencycoda/mia-loading": "0.0.3",
-    "@agencycoda/mia-table": "^11.0.32",
+    "@agencycoda/mia-table": "^11.0.45",
     "@angular/animations": "~12.2.0",
     "@angular/cdk": "^12.2.3",
     "@angular/common": "~12.2.0",
@@ -37,7 +37,6 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~12.2.0",
-    "@angular/cli": "^13.1.2",
     "@angular/compiler-cli": "~12.2.0",
     "@types/jasmine": "~3.8.0",
     "@types/node": "^12.11.1",

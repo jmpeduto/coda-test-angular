@@ -1,0 +1,11 @@
+{
+    "/client/list*": {
+      "target": "https://agency-coda.uc.r.appspot.com/client/list",
+      "secure": false,
+      "logLevel": "debug",
+      "changeOrigin": true,
+        "pathRewrite": {
+          "^/client/list": ""
+        }
+    }
+}
