@@ -54,6 +54,7 @@ export class HomeComponent implements OnInit {
   loadConfig() {
     this.tableConfig.service = this._clientService;
     this.tableConfig.id = 'table-test-jpmeduto';
+    this.tableConfig.query.itemPerPage = 5;
     this.tableConfig.columns = [
       // { key: 'selection', type: 'selection', title: '' },
       //{ key: 'id', type: 'string', title: 'ID', field_key: 'id' },
@@ -93,7 +94,6 @@ export class HomeComponent implements OnInit {
 
     this.tableConfig.onClick.subscribe((result) => {
       console.log('--ACTION--');
-      console.log(result.key);
       console.log(result);
       this.clientEdit(result.item);
     });

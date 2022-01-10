@@ -13,6 +13,7 @@ import { MiaFormModule } from '@agencycoda/mia-form';
 import { MiaLoadingModule } from '@agencycoda/mia-loading';
 import { HomeComponent } from './components/home/home.component';
 import { ClientActionsDialogComponent } from './components/client-actions-dialog/client-actions-dialog.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ClientActionsDialogComponent } from './components/client-actions-dialog
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatButtonModule,
 
     // Agency Coda Modules
     MiaCoreModule,
