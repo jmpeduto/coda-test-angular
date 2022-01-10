@@ -17,17 +17,18 @@ export class ClientService extends MiaBaseCrudHttpService<Client> {
     this.basePathUrl = environment.baseUrl + 'client';
   }
 
-  // getClients(){
-  //   return this.http.post(this.basePathUrl+'/list', {});
-  // }
-  getClients(){
-    return this.http.post(this.basePathUrl+'/list', {});
-  }
-
   listOb(query: MiaQuery): Observable<MiaPagination<any>> {
     let params: any = query.toParams();
     //params.access_token = 'aa9676c80bc803b902522459852365847dceb447';
     return this.postOb(this.basePathUrl + '/list', params);
+  }
+
+  list(query: MiaQuery): Promise<MiaPagination<any>> {
+    return this.listWithExtras(query, { access_token: 'aa9676c80bc803b902522459852365847dceb447'});
+  }
+
+  removeOb(itemId: number): Observable<boolean> {
+      return this.deleteOb(this.basePathUrl + '/remove' + '/' + itemId);
   }
  
 }

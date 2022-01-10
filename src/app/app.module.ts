@@ -11,14 +11,14 @@ import { MiaCoreModule, MIA_GOOGLE_STORAGE_PROVIDER } from '@agencycoda/mia-core
 import { MiaTableModule } from '@agencycoda/mia-table';
 import { MiaFormModule } from '@agencycoda/mia-form';
 import { MiaLoadingModule } from '@agencycoda/mia-loading';
-import { HomeComponent } from './components/home/home.component';
+import { ClientComponent } from './components/home/client.component';
 import { ClientActionsDialogComponent } from './components/client-actions-dialog/client-actions-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
+    ClientComponent,
     ClientActionsDialogComponent
   ],
   imports: [

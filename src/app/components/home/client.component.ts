@@ -10,10 +10,10 @@ import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  templateUrl: './client.component.html',
+  styleUrls: ['./client.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class ClientComponent implements OnInit {
   //client list
   mockData?: MiaPagination<any>;
   clientList: any[] = [];
@@ -32,6 +32,8 @@ export class HomeComponent implements OnInit {
     // });
     this.setMockData();
     this.queryScroll.itemPerPage = 1;
+    // this.queryScroll.('remove');
+    this.queryScroll;
   }
 
   setMockData() {
@@ -56,8 +58,6 @@ export class HomeComponent implements OnInit {
     this.tableConfig.id = 'table-test-jpmeduto';
     this.tableConfig.query.itemPerPage = 5;
     this.tableConfig.columns = [
-      // { key: 'selection', type: 'selection', title: '' },
-      //{ key: 'id', type: 'string', title: 'ID', field_key: 'id' },
       {
         key: 'user',
         type: 'user',
@@ -95,7 +95,17 @@ export class HomeComponent implements OnInit {
     this.tableConfig.onClick.subscribe((result) => {
       console.log('--ACTION--');
       console.log(result);
-      this.clientEdit(result.item);
+      //ejecuta los eventos de click en los botones de contexto del item de la tabla
+      switch(result.key){
+        case 'edit':
+          this.clientEdit(result.item);
+        break;
+        case 'remove':
+          this.clientRemove(result.item);
+        break;
+      }
+      
+
     });
   }
 
@@ -131,5 +141,51 @@ export class HomeComponent implements OnInit {
       .afterClosed();
   }
 
-  clientRemove() {}
+  clientAdd(){
+    let data = new MiaFormModalConfig();
+    data.service = this._clientService;
+    data.titleNew = 'Create Client';
+    data.titleEdit = 'Edit Client';
+    let config = new MiaFormConfig();
+    // config.fields = [{ key: 'email', type: 'email'}];
+    data.item = new Client();
+    config.hasSubmit = false;
+    // config.
+    config.fields = [
+      { key: 'firstname', type: MiaField.TYPE_STRING, label: 'First name' },
+      { key: 'lastname', type: MiaField.TYPE_STRING, label: 'Last name' },
+      {
+        key: 'email',
+        type: MiaField.TYPE_STRING,
+        label: 'Email',
+        validators: [Validators.required],
+      },
+    ];
+    config.errorMessages = [
+      { key: 'required', message: 'The "%label%" is required.' },
+    ];
+    data.config = config;
+    return this.dialog
+      .open(MiaFormModalComponent, {
+        width: '520px',
+        panelClass: 'modal-full-width-mobile',
+        data: data,
+        
+      })
+      .afterClosed().subscribe( result => {
+        console.log('closed');
+        //en caso de darse el alta correctamente resfresca la tabla
+        if (result) {
+          console.log(result);
+          this._clientService.list(this.queryScroll);
+        }
+      })
+  }
+
+  clientRemove(client: Client) {
+    console.log('---removing');
+    this._clientService.removeOb(client.id).subscribe( resp => {
+      console.log(resp);
+    });
+  }
 }

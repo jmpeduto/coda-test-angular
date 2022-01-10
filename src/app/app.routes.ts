@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
+import { ClientComponent } from './components/home/client.component';
 
 export const ROUTES: Routes = [
-    {path: 'home', component: HomeComponent},
-    {path: '', pathMatch: 'full', redirectTo: 'home'},
-    {path: '**', pathMatch: 'full', redirectTo: 'home'}
+    {path: 'client-list', component: ClientComponent},
+    {path: '', pathMatch: 'full', redirectTo: 'client-list'},
+    {path: '**', pathMatch: 'full', redirectTo: 'client-list'}
 ]
