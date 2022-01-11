@@ -22,9 +22,7 @@ export class ClientRemoveDialogComponent implements OnInit {
   }
 
   removeClient(id:number){
-    console.log('---emitter dialog remove');
-    // this.removeClientEmitter.emit(id);
-    this._clientService.remove(id);
+    this._clientService.removeOb(id).subscribe( resp => (this.dialogRef.close(resp)));
   }
 
 }

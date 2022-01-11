@@ -1,13 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MiaPagination, MiaQuery } from '@agencycoda/mia-core';
 
 import { Client } from 'src/app/entities/client';
-import { MiaTableConfig } from 'agencycoda/mia-table/src/public-api';
+import { MiaTableComponent, MiaTableConfig } from 'agencycoda/mia-table/src/public-api';
 import { ClientService } from '../../services/client.service';
-import { MiaField, MiaFormConfig, MiaFormModalComponent, MiaFormModalConfig } from '@agencycoda/mia-form';
+import {
+  MiaField,
+  MiaFormConfig,
+  MiaFormModalComponent,
+  MiaFormModalConfig,
+} from '@agencycoda/mia-form';
 import { Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ClientRemoveDialogComponent } from '../dialogs/client-remove-dialog/client-remove-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -19,11 +25,23 @@ export class ClientComponent implements OnInit {
   mockData?: MiaPagination<any>;
   clientList: any[] = [];
 
+  @ViewChild('tableComp') tableComp!: MiaTableComponent;
+
+
+  //borrarlo si el refresh de la lista va por otro lado
+  // dataItems = new MiaPagination<any>();
+
   //table configuration
   tableConfig: MiaTableConfig = new MiaTableConfig();
   queryScroll = new MiaQuery();
 
-  constructor(private _clientService: ClientService, public dialog: MatDialog) {}
+  constructor(
+    private _clientService: ClientService,
+    public dialog: MatDialog,
+    private router: Router
+  ) {
+
+  }
 
   ngOnInit() {
     this.loadConfig();
@@ -94,23 +112,21 @@ export class ClientComponent implements OnInit {
       'No hay clientes almacenados en el sistema';
 
     this.tableConfig.onClick.subscribe((result) => {
-      console.log('--ACTION--');
-      console.log(result);
+      // console.log('--ACTION--');
+      // console.log(result);
       //ejecuta los eventos de click en los botones de contexto del item de la tabla
-      switch(result.key){
+      switch (result.key) {
         case 'edit':
           this.clientEdit(result.item);
-        break;
+          break;
         case 'remove':
           this.clientRemove(result.item);
-        break;
+          break;
       }
-      
-
     });
   }
 
-  clientEdit(client:Client) {
+  clientEdit(client: Client) {
     let data = new MiaFormModalConfig();
     data.service = this._clientService;
     data.titleNew = 'Create Client';
@@ -142,7 +158,7 @@ export class ClientComponent implements OnInit {
       .afterClosed();
   }
 
-  clientAdd(){
+  clientAdd() {
     let data = new MiaFormModalConfig();
     data.service = this._clientService;
     data.titleNew = 'Create Client';
@@ -171,38 +187,36 @@ export class ClientComponent implements OnInit {
         width: '520px',
         panelClass: 'modal-full-width-mobile',
         data: data,
-        
       })
-      .afterClosed().subscribe( result => {
-        console.log('closed');
+      .afterClosed()
+      .subscribe((result) => {
+        // console.log('closed');
         //en caso de darse el alta correctamente resfresca la tabla
         if (result) {
-          console.log(result);
-          this._clientService.list(this.queryScroll);
+          // console.log(result);
+          this.tableComp.loadItems();
         }
-      })
+      });
   }
 
   clientRemove(client: Client) {
-    // this._clientService.removeOb(client.id).subscribe( resp => {
-    //   console.log(resp);
-  // });
 
-  let data = new MiaFormModalConfig();
-  data.item = client;
-  console.log(client);
-    // data.service = this._clientService;
+    let data = new MiaFormModalConfig();
+    data.item = client;
+    // console.log(client);
     console.log('---removing');
     return this.dialog
       .open(ClientRemoveDialogComponent, {
-        width: '300px',
+        width: '400px',
         panelClass: 'modal-full-width-mobile',
         data: data.item,
       })
-      .afterClosed();
-  }
-
-  removeClient($event:any){
-    console.log($event);
+      .afterClosed()
+      .subscribe((result) => {
+        //si ok al borrar 
+        if(result){
+          this.tableComp.loadItems();
+        }
+      });
   }
 }
