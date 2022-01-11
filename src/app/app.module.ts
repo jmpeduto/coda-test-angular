@@ -12,7 +12,6 @@ import { MiaTableModule } from '@agencycoda/mia-table';
 import { MiaFormModule } from '@agencycoda/mia-form';
 import { MiaLoadingModule } from '@agencycoda/mia-loading';
 import { ClientComponent } from './components/home/client.component';
-import { ClientActionsDialogComponent } from './components/dialogs/client-actions-dialog/client-actions-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
 import { ClientRemoveDialogComponent } from './components/dialogs/client-remove-dialog/client-remove-dialog.component';
 import { MatIconModule } from '@angular/material/icon';
@@ -21,7 +20,6 @@ import { MatIconModule } from '@angular/material/icon';
   declarations: [
     AppComponent,
     ClientComponent,
-    ClientActionsDialogComponent,
     ClientRemoveDialogComponent
   ],
   imports: [

@@ -201,4 +201,8 @@ export class ClientComponent implements OnInit {
       })
       .afterClosed();
   }
+
+  removeClient($event:any){
+    console.log($event);
+  }
 }

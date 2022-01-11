@@ -1,7 +1,6 @@
 <h4
   mat-dialog-title=""
   class="mat-dialog-title"
-  id="mat-dialog-title-1"
 >
  
 <span >Remove Client </span><span style="color: red;">{{data.firstname | uppercase}}&nbsp;{{data.lastname | uppercase}}</span>
@@ -15,7 +14,7 @@
     type="button"
     style="float: right; top:-20px;right:-20px;"
     (click)="onNoClick()"
-
+    cdkFocusInitial
   >
     <span class="mat-button-wrapper"
       ><mat-icon
@@ -29,7 +28,7 @@
       matripple
       class="mat-ripple mat-button-ripple mat-button-ripple-round"
     ></span
-    ><span class="mat-button-focus-overlay"></span>
+    >
   </button>
 </h4>
 
@@ -50,7 +49,7 @@
     mat-raised-button
     mat-button-base
     color="primary"
-    cdkFocusInitial
+    (click)="removeClient(data.id)"
   >
     Remove
   </button>
