@@ -16,6 +16,8 @@ export class ClientRemoveDialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onNoClick(){}
+  onNoClick(){
+    this.dialogRef.close();
+  }
 
 }
