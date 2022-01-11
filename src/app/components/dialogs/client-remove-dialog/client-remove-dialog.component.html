@@ -1,0 +1,55 @@
+<h4
+  mat-dialog-title=""
+  class="mat-dialog-title"
+  id="mat-dialog-title-1"
+>
+ 
+<span >Remove Client </span><span style="color: red;">{{data.firstname | uppercase}}&nbsp;{{data.lastname | uppercase}}</span>
+
+    
+<button
+    mat-icon-button=""
+    mattooltip="Close"
+    mat-dialog-close=""
+    class="mat-focus-indicator mat-icon-button mat-button-base"
+    type="button"
+    style="float: right; top:-20px;right:-20px;"
+  >
+    <span class="mat-button-wrapper"
+      ><mat-icon
+        role="img"
+        class="mat-icon notranslate material-icons mat-icon-no-color"
+        aria-hidden="true"
+        data-mat-icon-type="font"
+        >close</mat-icon
+      ></span
+    ><span
+      matripple
+      class="mat-ripple mat-button-ripple mat-button-ripple-round"
+    ></span
+    ><span class="mat-button-focus-overlay"></span>
+  </button>
+</h4>
+
+<div mat-dialog-content>
+  <p style="font-weight: bolder;">Are you sure?</p>
+</div>
+<div mat-dialog-actions class="mat-dialog-actions">
+  <button
+    mat-focus-indicator
+    mat-stroked-button
+    mat-button-base
+    (click)="onNoClick()"
+  >
+    Cancel
+  </button>
+  <button
+    mat-focus-indicator
+    mat-raised-button
+    mat-button-base
+    color="primary"
+    cdkFocusInitial
+  >
+    Remove
+  </button>
+</div>

@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { MiaPagination, MiaQuery } from '@agencycoda/mia-core';
 
 import { Client } from 'src/app/entities/client';
-import { MiaColumn, MiaTableConfig } from 'agencycoda/mia-table/src/public-api';
+import { MiaTableConfig } from 'agencycoda/mia-table/src/public-api';
 import { ClientService } from '../../services/client.service';
 import { MiaField, MiaFormConfig, MiaFormModalComponent, MiaFormModalConfig } from '@agencycoda/mia-form';
 import { Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { ClientRemoveDialogComponent } from '../dialogs/client-remove-dialog/client-remove-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -183,9 +184,21 @@ export class ClientComponent implements OnInit {
   }
 
   clientRemove(client: Client) {
+    // this._clientService.removeOb(client.id).subscribe( resp => {
+    //   console.log(resp);
+  // });
+
+  let data = new MiaFormModalConfig();
+  data.item = client;
+  console.log(client);
+    // data.service = this._clientService;
     console.log('---removing');
-    this._clientService.removeOb(client.id).subscribe( resp => {
-      console.log(resp);
-    });
+    return this.dialog
+      .open(ClientRemoveDialogComponent, {
+        width: '300px',
+        panelClass: 'modal-full-width-mobile',
+        data: data.item,
+      })
+      .afterClosed();
   }
 }

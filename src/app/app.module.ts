@@ -12,20 +12,24 @@ import { MiaTableModule } from '@agencycoda/mia-table';
 import { MiaFormModule } from '@agencycoda/mia-form';
 import { MiaLoadingModule } from '@agencycoda/mia-loading';
 import { ClientComponent } from './components/home/client.component';
-import { ClientActionsDialogComponent } from './components/client-actions-dialog/client-actions-dialog.component';
+import { ClientActionsDialogComponent } from './components/dialogs/client-actions-dialog/client-actions-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
+import { ClientRemoveDialogComponent } from './components/dialogs/client-remove-dialog/client-remove-dialog.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
     AppComponent,
     ClientComponent,
-    ClientActionsDialogComponent
+    ClientActionsDialogComponent,
+    ClientRemoveDialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatButtonModule,
+    MatIconModule,
 
     // Agency Coda Modules
     MiaCoreModule,
