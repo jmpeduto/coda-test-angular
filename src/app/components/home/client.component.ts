@@ -39,7 +39,7 @@ export class ClientComponent implements OnInit {
 
   ngOnInit() {
     this.loadConfig();
-    this.setMockData();
+    // this.setMockData();
     this.queryScroll.itemPerPage = 1;
     this.queryScroll;
   }
@@ -178,7 +178,18 @@ export class ClientComponent implements OnInit {
         //en caso de darse el alta correctamente resfresca la tabla
         if (result) {
           // console.log(result);
-          this.tableComp.loadItems();
+          this.tableComp.isLoading.emit(false);
+          // this.tableComp.dataItems = new MiaPagination();
+          // this.tableComp.dataItems?.data.push(result);
+          this._clientService.listOb(this.queryScroll).subscribe( (resp) => {
+            console.log(resp);
+            // this.tableComp.dataItems?.data.push(resp.data[0]);
+            
+            // this.tableComp.dataItems?. = 1;
+            this.tableComp.dataItems?.data.unshift(resp.data[0]);
+            console.log(this.tableComp.dataItems?.data);
+          })
+          // console.log(this.tableComp.dataItems?.data.push(result));
         }
       });
   }
