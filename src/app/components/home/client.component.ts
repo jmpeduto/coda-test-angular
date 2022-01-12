@@ -200,7 +200,7 @@ export class ClientComponent implements OnInit {
   }
 
   clientRemove(client: Client) {
-
+    //TODO agregar que despues de eliminado un cliente vuelva a la pagina 1
     let data = new MiaFormModalConfig();
     data.item = client;
     // console.log(client);
