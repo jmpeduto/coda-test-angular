@@ -2,7 +2,10 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MiaPagination, MiaQuery } from '@agencycoda/mia-core';
 
 import { Client } from 'src/app/entities/client';
-import { MiaTableComponent, MiaTableConfig } from 'agencycoda/mia-table/src/public-api';
+import {
+  MiaTableComponent,
+  MiaTableConfig,
+} from 'agencycoda/mia-table/src/public-api';
 import { ClientService } from '../../services/client.service';
 import {
   MiaField,
@@ -33,15 +36,11 @@ export class ClientComponent implements OnInit {
     private _clientService: ClientService,
     public dialog: MatDialog,
     private router: Router
-  ) {
-
-  }
+  ) {}
 
   ngOnInit() {
     this.loadConfig();
     this.setMockData();
-    this.queryScroll.itemPerPage = 1;
-    this.queryScroll;
   }
 
   setMockData() {
@@ -174,17 +173,15 @@ export class ClientComponent implements OnInit {
       })
       .afterClosed()
       .subscribe((result) => {
-        //TODO edit despues de afterClosed modifique dta sin refrescar la tabla
         //en caso de darse el alta correctamente resfresca la tabla
         if (result) {
-          // console.log(result);
+          this.tableConfig.query.pageCurrent = 1;
           this.tableComp.loadItems();
         }
       });
   }
 
   clientRemove(client: Client) {
-    //TODO agregar que despues de eliminado un cliente vuelva a la pagina 1
     let data = new MiaFormModalConfig();
     data.item = client;
     return this.dialog
@@ -195,8 +192,8 @@ export class ClientComponent implements OnInit {
       })
       .afterClosed()
       .subscribe((result) => {
-        //si ok al borrar 
-        if(result){
+        //si ok al borrar refresca la tabla
+        if (result) {
           this.tableComp.loadItems();
         }
       });
