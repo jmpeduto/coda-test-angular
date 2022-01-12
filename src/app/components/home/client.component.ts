@@ -21,15 +21,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./client.component.scss'],
 })
 export class ClientComponent implements OnInit {
-  //client list
   mockData?: MiaPagination<any>;
-  clientList: any[] = [];
 
   @ViewChild('tableComp') tableComp!: MiaTableComponent;
-
-
-  //borrarlo si el refresh de la lista va por otro lado
-  // dataItems = new MiaPagination<any>();
 
   //table configuration
   tableConfig: MiaTableConfig = new MiaTableConfig();
@@ -45,13 +39,8 @@ export class ClientComponent implements OnInit {
 
   ngOnInit() {
     this.loadConfig();
-    // this._clientService.getClients().subscribe((resp: any) => {
-    //   this.clientList = resp.response.data;
-    //   console.log(this.clientList);
-    // });
     this.setMockData();
     this.queryScroll.itemPerPage = 1;
-    // this.queryScroll.('remove');
     this.queryScroll;
   }
 
@@ -112,8 +101,6 @@ export class ClientComponent implements OnInit {
       'No hay clientes almacenados en el sistema';
 
     this.tableConfig.onClick.subscribe((result) => {
-      // console.log('--ACTION--');
-      // console.log(result);
       //ejecuta los eventos de click en los botones de contexto del item de la tabla
       switch (result.key) {
         case 'edit':
@@ -132,7 +119,6 @@ export class ClientComponent implements OnInit {
     data.titleNew = 'Create Client';
     data.titleEdit = 'Edit Client';
     let config = new MiaFormConfig();
-    // config.fields = [{ key: 'email', type: 'email'}];
     data.item = client;
     config.hasSubmit = false;
     config.fields = [
@@ -164,10 +150,8 @@ export class ClientComponent implements OnInit {
     data.titleNew = 'Create Client';
     data.titleEdit = 'Edit Client';
     let config = new MiaFormConfig();
-    // config.fields = [{ key: 'email', type: 'email'}];
     data.item = new Client();
     config.hasSubmit = false;
-    // config.
     config.fields = [
       { key: 'firstname', type: MiaField.TYPE_STRING, label: 'First name' },
       { key: 'lastname', type: MiaField.TYPE_STRING, label: 'Last name' },
@@ -190,7 +174,7 @@ export class ClientComponent implements OnInit {
       })
       .afterClosed()
       .subscribe((result) => {
-        // console.log('closed');
+        //TODO edit despues de afterClosed modifique dta sin refrescar la tabla
         //en caso de darse el alta correctamente resfresca la tabla
         if (result) {
           // console.log(result);
@@ -203,8 +187,6 @@ export class ClientComponent implements OnInit {
     //TODO agregar que despues de eliminado un cliente vuelva a la pagina 1
     let data = new MiaFormModalConfig();
     data.item = client;
-    // console.log(client);
-    console.log('---removing');
     return this.dialog
       .open(ClientRemoveDialogComponent, {
         width: '400px',
