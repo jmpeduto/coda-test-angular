@@ -14,6 +14,7 @@ import { Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ClientRemoveDialogComponent } from '../dialogs/client-remove-dialog/client-remove-dialog.component';
 import { Router } from '@angular/router';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-home',
@@ -24,6 +25,7 @@ export class ClientComponent implements OnInit {
   mockData?: MiaPagination<any>;
 
   @ViewChild('tableComp') tableComp!: MiaTableComponent;
+  // @ViewChild('mat-paginator') matPaginator!: MatPaginator;
 
   //table configuration
   tableConfig: MiaTableConfig = new MiaTableConfig();
@@ -40,7 +42,7 @@ export class ClientComponent implements OnInit {
   ngOnInit() {
     this.loadConfig();
     // this.setMockData();
-    this.queryScroll.itemPerPage = 1;
+    // this.queryScroll.itemPerPage = 1;
     this.queryScroll;
   }
 
@@ -177,19 +179,22 @@ export class ClientComponent implements OnInit {
         //TODO edit despues de afterClosed modifique dta sin refrescar la tabla
         //en caso de darse el alta correctamente resfresca la tabla
         if (result) {
-          // console.log(result);
-          this.tableComp.isLoading.emit(false);
-          // this.tableComp.dataItems = new MiaPagination();
-          // this.tableComp.dataItems?.data.push(result);
+          this.queryScroll.itemPerPage = this.tableConfig.query.itemPerPage;
+          this.queryScroll.pageCurrent = 1;
+          // this.queryScroll.
+
           this._clientService.listOb(this.queryScroll).subscribe( (resp) => {
             console.log(resp);
-            // this.tableComp.dataItems?.data.push(resp.data[0]);
-            
-            // this.tableComp.dataItems?. = 1;
-            this.tableComp.dataItems?.data.unshift(resp.data[0]);
-            console.log(this.tableComp.dataItems?.data);
+            // let page = new PageEvent();
+            // page.pageIndex = 1;
+            // this.tableComp.pageChange.emit(page);
+            // this.tableComp.pageChange(Page);
+            // this.matPaginator.firstPage();
+            this.tableComp.dataItems = resp;
           })
-          // console.log(this.tableComp.dataItems?.data.push(result));
+          //   let page = new PageEvent();
+          //   page.pageIndex = 1;
+          // this.tableComp.onPageChange(page);
         }
       });
   }
