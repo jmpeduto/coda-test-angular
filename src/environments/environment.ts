@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:4200/',
+  baseUrl: 'https://agency-coda.uc.r.appspot.com/',
 
   cloudStorageBucket: 'codahub-files',
 };

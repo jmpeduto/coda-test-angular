@@ -77,7 +77,6 @@
           "configurations": {
             "production": {
               "browserTarget": "coda-test-angular:build:production",
-              "proxyConfig": "proxy.conf.json"
             },
             "development": {
               "browserTarget": "coda-test-angular:build:development",

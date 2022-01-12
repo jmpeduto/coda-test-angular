@@ -40,7 +40,6 @@ export class ClientComponent implements OnInit {
 
   ngOnInit() {
     this.loadConfig();
-    this.setMockData();
   }
 
   setMockData() {
